@@ -10,3 +10,8 @@ class ProductViewSerializer(serializers.ModelSerializer):
     
     def get_is_available(self, obj):
         return obj.stock>0
+    
+class ProductCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Product
+        fields = ['title', 'description', 'price', 'stock']
