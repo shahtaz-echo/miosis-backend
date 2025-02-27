@@ -9,7 +9,7 @@ BASE_MIDDLEWARES = [
 ]
 
 THIRD_PARTY_MIDDLEWARES = [
-    
+    # 'app.settings.middlewares.exception_handler.Custom404Middleware'
 ]
 
 MIDDLEWARE = BASE_MIDDLEWARES + THIRD_PARTY_MIDDLEWARES

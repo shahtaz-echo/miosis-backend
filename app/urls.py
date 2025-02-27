@@ -1,23 +1,17 @@
-"""
-URL configuration for app project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
+from app.utils.custom_404_view import Custom404View
+from django.http import JsonResponse
+
+def error_404(request, exception):
+    message = "Resource not found"
+    return JsonResponse(data={'message': message}, status=404)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', include('products.api.urls.client.urls_v1'))
+    path('products/', include('products.api.urls.client.urls_v1')),
+    path('api/v1/products/', include('products.api.v1.urls'))
 ]
+
+handler404 = error_404

@@ -11,6 +11,7 @@ class Product(BaseModel):
     def __str__(self) -> str:
         return self.title
     
+    @property
     def is_in_stock(self) -> bool:
         return self.stock>0
     

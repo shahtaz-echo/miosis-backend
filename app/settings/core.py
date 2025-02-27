@@ -1,13 +1,19 @@
 from pathlib import Path
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-kdhdj4!&gxev(8&s1=dv&qd1*ejn8odu1uz(wj%h_)!2aqvgv%'
+SECRET_KEY = os.getenv("APP_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("APP_ENV") == 'dev'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
 
 # Application definition
 
@@ -32,11 +38,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
