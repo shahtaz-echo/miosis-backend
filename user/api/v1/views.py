@@ -1,12 +1,12 @@
 from rest_framework import generics, permissions
-from user.models import User
+from user.models import CustomUser
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
 from ..serializers import CreateUserSerializer
 
 
 class UserRegistrationViews(generics.CreateAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = CreateUserSerializer
     permission_classes = [permissions.AllowAny]
 

@@ -15,7 +15,7 @@ phone_regex = RegexValidator(
 )
 
 # Create your models here.
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     email=models.EmailField(
         unique=True,
         verbose_name=_('Email Address'),

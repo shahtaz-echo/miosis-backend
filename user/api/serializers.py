@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import User
+from ..models import CustomUser
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
@@ -8,7 +8,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
     password_confirm = serializers.CharField(write_only=True, required=True, style={'input_type':'password'})
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = [
             'email','password', 'password_confirm',
             'first_name','last_name', 'phone',
@@ -42,7 +42,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
         password = validated_data.pop('password')
 
-        user = User(**validated_data)
+        user = CustomUser(**validated_data)
         user.set_password(password)
         user.save()
 

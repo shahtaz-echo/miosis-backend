@@ -4,24 +4,25 @@ services:
   web:
     build: .
     container_name: miosis_app
-    command: python manage.py runserver 0.0.0.0:5000
+    command: sh -c "python manage.py makemigrations user && python manage.py makemigrations products && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
     volumes:
-      - ./:/miosis_app:delegated
+      - .:/miosis_app:delegated
     ports:
       - "5000:5000"
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://hadron:cnidaria2917@db:5423/miosis_db
+      - DATABASE_URL=postgres://hadron:cnidaria2917@db:5432/miosis_db
+      - PYTHONUNBUFFERED=1
     restart: unless-stopped
 
   db:
     image: postgres:16
     container_name: miosis_db
     environment:
-      POSTGRES_DB: miosis_db
-      POSTGRES_USER: hadron
-      POSTGRES_PASSWORD: cnidaria2917
+      - POSTGRES_DB=miosis_db
+      - POSTGRES_USER=hadron
+      - POSTGRES_PASSWORD=cnidaria2917
     ports:
       - "5423:5432"
     volumes:

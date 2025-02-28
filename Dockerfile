@@ -10,7 +10,8 @@ WORKDIR /miosis_app
 COPY requirements.txt /miosis_app/
 
 # Install dependencies
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
 # Copy the rest of the project files
 COPY . /miosis_app/
@@ -18,5 +19,11 @@ COPY . /miosis_app/
 # Expose port 5000
 EXPOSE 5000
 
-# Ensure the correct command is used
-CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:5000"]
+# Run migrations in a specific order and start the server
+CMD ["sh", "-c", "python manage.py makemigrations user && \
+                  python manage.py makemigrations products && \
+                  python manage.py makemigrations && \
+                  python manage.py migrate user && \
+                  python manage.py migrate products && \
+                  python manage.py migrate && \
+                  python manage.py runserver 0.0.0.0:5000"]
