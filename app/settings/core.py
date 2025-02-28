@@ -1,25 +1,12 @@
 from pathlib import Path
-import os
-
-from dotenv import load_dotenv
-load_dotenv()
-
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("APP_SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("APP_ENV") == 'dev'
-
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
-
 # Application definition
-
 ROOT_URLCONF = 'app.urls'
 
 WSGI_APPLICATION = 'app.wsgi.application'
+
+AUTH_USER_MODEL = 'user.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

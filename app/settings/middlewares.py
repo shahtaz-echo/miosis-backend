@@ -8,8 +8,9 @@ BASE_MIDDLEWARES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-THIRD_PARTY_MIDDLEWARES = [
-    # 'app.settings.middlewares.exception_handler.Custom404Middleware'
+CUSTOM_MIDDLEWARES = [
+    'app.middlewares.exception_handler.Custom404Middleware'
 ]
 
-MIDDLEWARE = BASE_MIDDLEWARES + THIRD_PARTY_MIDDLEWARES
+# Combine both lists
+MIDDLEWARE = BASE_MIDDLEWARES + CUSTOM_MIDDLEWARES

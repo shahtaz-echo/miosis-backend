@@ -11,10 +11,10 @@ THIRD_PARTY_APPS = [
     'rest_framework'
 ]
 
-
-
 DEVELOPED_APPS = [
-    'products'
+    'products',
+    'base',
+    'user',
 ]
 
 INSTALLED_APPS = BASE_APPS + THIRD_PARTY_APPS + DEVELOPED_APPS
